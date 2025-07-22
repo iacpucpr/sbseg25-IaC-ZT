@@ -9,14 +9,17 @@ resource "docker_container" "ansible" {
   image = docker_image.ansible.name
 
   command = ["sleep", "infinity"]
-
-  volumes {
-  host_path      = abspath("${path.module}/../etapa3-ansible")
-  container_path = "/ansible"
-}
-
-  restart = "unless-stopped"
   networks_advanced {
     name = docker_network.minicurso-net.name
+  }
+
+
+  volumes {
+    host_path      = abspath("${path.module}/../etapa3-ansible")
+    container_path = "/ansible"
+}
+  volumes {
+    host_path      = abspath("${path.module}/ssh_key/id_rsa") 
+    container_path = "/home/minicurso/.ssh/id_rsa"           
   }
 }
