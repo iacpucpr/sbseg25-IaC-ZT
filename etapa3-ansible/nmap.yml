@@ -1,0 +1,8 @@
+- name: Install nmap
+  hosts: all
+  become: true
+  tasks:
+    - name: Ensure nmap is installed
+      apt:
+        name: nmap
+        state: present

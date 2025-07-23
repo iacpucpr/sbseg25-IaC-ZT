@@ -13,10 +13,11 @@ resource "null_resource" "install-alpine" {
       docker exec ${var.container_name} touch /run/openrc/softlevel 
       docker exec ${var.container_name} rc-service sshd restart
       docker exec ${var.container_name} adduser --disabled-password minicurso
+      docker exec ${var.container_name} passwd -u minicurso
       docker exec ${var.container_name} mkdir -p /home/minicurso/.ssh
+      docker exec ${var.container_name} chown -R minicurso:minicurso /home/minicurso/.ssh
       docker exec ${var.container_name} chmod 700 /home/minicurso/.ssh
-      docker cp ssh_keys/id_rsa.pub "${var.container_name}:/home/minicurso/.ssh/authorized_keys"
-      docker exec ${var.container_name} chmod 700 /home/minicurso/.ssh
+      docker exec ${var.container_name} chmod 600 /home/minicurso/.ssh/*
     EOT
   }
 }

@@ -21,8 +21,13 @@ resource "docker_container" "mariadb" {
     "MYSQL_PASSWORD=glpipass"
   ]
 
-volumes {
-  host_path      = abspath("${path.module}/db_data") # caminho absoluto
-  container_path = "/var/lib/mysql"
-}
+  volumes {
+    host_path      = abspath("${path.module}/db_data") # caminho absoluto
+    container_path = "/var/lib/mysql"
+  }
+  volumes {
+    host_path      = abspath("${path.module}/ssh_key/id_rsa.pub")
+    container_path = "/home/minicurso/.ssh/authorized_keys"
+  }
+
 }

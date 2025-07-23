@@ -26,5 +26,10 @@ resource "docker_container" "glpi" {
   networks_advanced {
     name = docker_network.minicurso-net.name
   }
+  volumes {
+    host_path      = abspath("${path.module}/ssh_key/id_rsa.pub")
+    container_path = "/home/minicurso/.ssh/authorized_keys"
+  }
+
 
 }
