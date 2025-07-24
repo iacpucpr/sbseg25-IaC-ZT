@@ -6,7 +6,7 @@ resource "null_resource" "install" {
   provisioner "local-exec" {
     command = <<EOT
       docker exec ${var.container_name} apt update
-      docker exec ${var.container_name} apt install -y openssh-server sudo
+      docker exec ${var.container_name} apt install -y openssh-server sudo python3 vim
       docker exec ${var.container_name} mkdir -p /var/run/sshd
       docker exec ${var.container_name} sed -i 's@session\\\\s*required\\\\s*pam_loginuid.so@session optional pam_loginuid.so@g' /etc/pam.d/sshd
       docker exec ${var.container_name} /usr/sbin/sshd
