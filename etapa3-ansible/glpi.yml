@@ -1,0 +1,60 @@
+- name: Configurar Apache com HTTPS
+  hosts: glpi
+  become: yes
+
+  vars:
+    apache_ssl_cert_path: /etc/ssl/certs/apache-selfsigned.crt
+    apache_ssl_key_path: /etc/ssl/private/apache-selfsigned.key
+    apache_vhost_conf_path: /etc/apache2/sites-available/glpi-ssl.conf
+    document_root_path: /var/www/html/glpi/public
+
+  tasks:
+    - name: Habilitar módulo SSL do Apache
+      command: a2enmod ssl headers
+      args:
+        creates: /etc/apache2/mods-enabled/ssl.load
+      notify: Recarregar Apache
+
+    - name: Garantir que os diretórios SSL existam
+      file:
+        path: "{{ item }}"
+        state: directory
+        mode: '0755'
+      with_items:
+        - /etc/ssl/certs
+        - /etc/ssl/private
+
+    - name: Gerar chave privada e certificado SSL autoassinado
+      command: >
+        openssl req -x509 -nodes -days 365 -newkey rsa:2048
+        -keyout {{ apache_ssl_key_path }}
+        -out {{ apache_ssl_cert_path }}
+        -subj "/C=BR/ST=Parana/L=Curitiba/O=PUCPR/OU=PPGIA/CN=192.168.56.3"
+      args:
+        creates: "{{ apache_ssl_cert_path }}"
+      notify: Recarregar Apache
+
+    - name: Configurar permissões para chave privada
+      file:
+        path: "{{ apache_ssl_key_path }}"
+        mode: '0600'
+      notify: Recarregar Apache
+
+    - name: Criar arquivo de configuração do Virtual Host HTTPS
+      template:
+        src: glpi-ssl.conf.j2
+        dest: "{{ apache_vhost_conf_path }}"
+        mode: '0644'
+      notify: Recarregar Apache
+
+    - name: Habilitar Virtual Host HTTPS
+      command: a2ensite {{ apache_vhost_conf_path | basename }}
+      args:
+        creates: /etc/apache2/sites-enabled/{{ apache_vhost_conf_path | basename }}
+      notify: Recarregar Apache
+
+  handlers:
+    - name: Recarregar Apache
+      service:
+        name: apache2
+        state: reloaded

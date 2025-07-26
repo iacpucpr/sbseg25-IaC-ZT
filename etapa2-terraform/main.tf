@@ -17,6 +17,7 @@ provider "docker" {
 
 locals {
   glpi_port = 8080
+  glpi_port_https = 443
 }
 module "install_glpi" {
   source         = "./modules/install"

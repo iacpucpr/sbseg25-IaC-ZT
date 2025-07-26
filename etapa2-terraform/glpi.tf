@@ -21,6 +21,10 @@ resource "docker_container" "glpi" {
     internal = 80
     external = local.glpi_port
   }
+ports {
+    internal = 443
+    external = local.glpi_port_https
+  }
 
   restart = "unless-stopped"
   networks_advanced {

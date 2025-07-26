@@ -1,0 +1,27 @@
+<IfModule mod_ssl.c>
+    <VirtualHost *:443>
+        ServerAdmin webmaster@localhost
+        DocumentRoot {{ document_root_path }}
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+        SSLEngine on
+        SSLCertificateFile {{ apache_ssl_cert_path }}
+        SSLCertificateKeyFile {{ apache_ssl_key_path }}
+
+        <Directory {{ document_root_path }}>
+            Require all granted
+            RewriteEngine On
+            RewriteCond %{REQUEST_FILENAME} !-f
+            RewriteRule ^(.*)$ index.php [QSA,L]
+        </Directory>
+
+        # Adicione outras configurações SSL recomendadas para segurança
+        SSLProtocol all -SSLv2 -SSLv3
+        SSLCipherSuite EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH
+        SSLHonorCipherOrder on
+        Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains"
+        Header always set X-Frame-Options DENY
+        Header always set X-Content-Type-Options nosniff
+    </VirtualHost>
+</IfModule>
