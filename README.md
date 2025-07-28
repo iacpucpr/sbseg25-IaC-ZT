@@ -31,22 +31,34 @@ lab-zero-trust-final/
 ```bash
 cd etapa1-docker
 docker-compose up -d
-# Acesse http://localhost:8080
 ```
+# Acesse http://localhost:8080
 
 ### Etapa 2 – Terraform
 
 ```bash
 cd etapa2-terraform
-terraform init
-terraform apply -var="twingate_connector_token=seu_token_aqui"
+terraform init 
+terraform apply -auto-approve
+```
+# Testar conexão ao container do ansible por meio do comando: 
+```bash
+docker exec -it lab-zero-trust-ansible sh 
+```
+#Testar conexão usando SSH:
+```bash
+ssh -i /home/minicurso/.ssh/id_rsa minicurso@lab-zero-trust-mariadb 
+```
+#Testar conexão usando SSH:
+```bash
+ssh -i /home/minicurso/.ssh/id_rsa minicurso@lab-zero-trust-backup
 ```
 
 ### Etapa 3 – Ansible
+# No container do ansible executar:
 
 ```bash
-cd etapa3-ansible
-ansible-playbook -i inventory.ini playbook.yml
+ansible-playbook -i glpi.ini glpi.yml
 ```
 
 - Executa validação com Checkov (opcional)
@@ -66,3 +78,4 @@ docker-compose down -v
 ---
 
 Gerado em: 2025-07-04 18:32
+Atualizado em: 2025-07-04 18:00
