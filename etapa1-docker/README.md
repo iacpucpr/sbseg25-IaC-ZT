@@ -1,8 +1,17 @@
-### Etapa 1 – Docker Compose
-# Entre no diretório da etapa1 `cd etapa1-docker`
-# Use `docker-compose up -d` para subir o ambiente base.
+# Etapa 1 – Docker Compose
+### Entre no diretório da etapa1 
 
-# Acesse http://localhost:8080
+```bash
+cd etapa1-docker`
+```
+### Execute o docker compose para provisionar o ambiente base:
+```bash
+docker-compose up -d
+```
+### Acesse http://localhost:8080
 
-### Limpeza
-# Executar `docker-compose down -v`
+### Efetuando a limpeza da etapa1:
+
+```bash
+docker-compose down -v
+```
