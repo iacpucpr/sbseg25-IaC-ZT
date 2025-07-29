@@ -24,58 +24,11 @@ lab-zero-trust-final/
 | Checkov | latest (`pip install checkov`) |
 | Twingate | conta + client |
 
-## Execução
 
-### Etapa 1 – Docker Compose
 
+## Clone este repositório:
+Se você ainda não o fez, clone este projeto para sua máquina local.
 ```bash
-cd etapa1-docker
-docker-compose up -d
+git clone https://github.com/iacpucpr/sbseg25-IaC-ZT/
+cd sbseg25-IaC-ZT
 ```
-# Acesse http://localhost:8080
-
-### Etapa 2 – Terraform
-
-```bash
-cd etapa2-terraform
-terraform init 
-terraform apply -auto-approve
-```
-# Testar conexão ao container do ansible por meio do comando: 
-```bash
-docker exec -it lab-zero-trust-ansible sh 
-```
-#Testar conexão usando SSH:
-```bash
-ssh -i /home/minicurso/.ssh/id_rsa minicurso@lab-zero-trust-mariadb 
-```
-#Testar conexão usando SSH:
-```bash
-ssh -i /home/minicurso/.ssh/id_rsa minicurso@lab-zero-trust-backup
-```
-
-### Etapa 3 – Ansible
-# No container do ansible executar:
-
-```bash
-ansible-playbook -i glpi.ini glpi.yml
-```
-
-- Executa validação com Checkov (opcional)
-- Aplica hardening no GLPI
-- Verifica se o Twingate está funcionando
-
-### Limpeza
-
-```bash
-cd etapa2-terraform
-terraform destroy -auto-approve
-
-cd etapa1-docker
-docker-compose down -v
-```
-
----
-
-Gerado em: 2025-07-04 18:32
-Atualizado em: 2025-07-04 18:00
