@@ -26,13 +26,15 @@ sudo terraform apply -auto-approve
 sudo docker exec -it lab-zero-trust-ansible sh
 ```
 
-### Teste a conexão ao container do MariaDB via ansible:
+### Teste a conexão ao container do MariaDB via ansible, retornar para o container do ansible:
 ```bash
 ssh -i /home/minicurso/.ssh/id_rsa minicurso@lab-zero-trust-mariadb
+exit
 ```
-### Teste a conexão ao container do Backup via ansible:
+### Teste a conexão ao container do Backup via ansible, retornar para o container do ansible:
 ```bash
 ssh -i /home/minicurso/.ssh/id_rsa minicurso@lab-zero-trust-backup
+exit
 ```
 ###
 ### Caso a conexão seja bem sucedida, sair do container do ansible:

@@ -38,7 +38,8 @@ exit
 ```
 ### Instalar pacote python venv:
 ```bash
-sudo apt install python3.12-venv
+sudo apt update
+sudo apt install python3x-venv
 ```
 ### Crie um ambiente virtual para o Checkov:
 ```bash   
@@ -55,6 +56,6 @@ pip3 install checkov
 ```
 ### Execute o Checkov:
 ```bash
-checkov -d ../etapa1-docker
+checkov -d ../etapa2-terraform
 ```
 ### Analise os resultados da varredura para observar as falhas detectadas.
