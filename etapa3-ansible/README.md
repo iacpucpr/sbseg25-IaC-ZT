@@ -56,6 +56,6 @@ pip3 install checkov
 ```
 ### Execute o Checkov:
 ```bash
-checkov -d ../etapa2-terraform
+checkov -d ../etapa3-ansible
 ```
 ### Analise os resultados da varredura para observar as falhas detectadas.
