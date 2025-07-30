@@ -15,3 +15,8 @@ sudo docker-compose up -d
 ```bash
 sudo docker-compose down -v
 ```
+
+### Efetuando a limpeza do ambiente docker. Esse comando remove recursos Docker não utilizados (contêineres, redes e imagens não utilizados ou parados):
+```bash
+sudo docker system prune --force
+```

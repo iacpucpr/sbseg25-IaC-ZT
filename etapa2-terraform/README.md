@@ -7,9 +7,10 @@
 ```bash
 cd etapa2-terraform
 ```
-### Crie as chaves SSH dentro do diretório ssh_keys:
+### Crie o diretório ssh_key e crie as chaves SSH dentro dele:
 
 ```bash
+mkdir ssh_key
 ssh-keygen -t rsa -N "" -f ssh_key/id_rsa
 ```
 ### Execute os comandos Terraform:

@@ -4,9 +4,9 @@
 ```bash
 sudo docker ps
 ```
-### Se os quatro containers (glpi, mariadb, backup e ansible) estiver ok, entrar no container do ansible:
+### Se os quatro containers (glpi, mariadb, backup e ansible) estiverem ativos, entrar no container do ansible:
 ```bash
-docker exec -it lab-zero-trust-ansible /bin/sh
+sudo docker exec -it lab-zero-trust-ansible /bin/sh
 ```
 ### Instale o pacote Nmap nos containers baseados em Debian usando Ansible:
 
