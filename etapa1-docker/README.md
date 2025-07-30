@@ -6,12 +6,12 @@ cd etapa1-docker`
 ```
 ### Execute o docker compose para provisionar o ambiente base:
 ```bash
-docker-compose up -d
+sudo docker-compose up -d
 ```
 ### Acesse http://localhost:8080
 
 ### Efetuando a limpeza da etapa1:
 
 ```bash
-docker-compose down -v
+sudo docker-compose down -v
 ```
